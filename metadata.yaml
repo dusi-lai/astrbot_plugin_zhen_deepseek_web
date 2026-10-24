@@ -18,8 +18,8 @@ desc: |
 
   计费：Search 与 Fetch 各 5 元 / 1000 次成功请求（官方现行价格）。
 version: 1.2.0
-author: your-github-name
-repo: https://github.com/your-github-name/astrbot_plugin_zhen_deepseek_web
+author: dusi-lai
+repo: https://github.com/dusi-lai/astrbot_plugin_zhen_deepseek_web
 astrbot_version: ">=4.16,<5"
 tags:
   - search
