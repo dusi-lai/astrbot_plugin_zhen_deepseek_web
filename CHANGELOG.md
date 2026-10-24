@@ -8,7 +8,7 @@
 - Markdown 降级更完整：还原反斜杠转义、表格转行、去掉与标题重复的首标题、ASCII 单词不拆断。
 
 ### 变更
-- 插件改名为 `astrbot_plugin_zhen_deepseek_web`，展示名「真·DeepSeek 联网搜索与抓取」，用于与市场上的钓鱼同名插件区分。
+- 插件改名为 `astrbot_plugin_zhen_deepseek_web`，展示名「真·DeepSeek 联网搜索与抓取」，用于与市场里的同名插件区分（重名场景下的标识，不针对具体项目）。
 - 状态指令增加二次抓取、输出模式信息。
 
 ## 1.0.0

@@ -1,6 +1,6 @@
 name: astrbot_plugin_zhen_deepseek_web
 display_name: 真·DeepSeek 联网搜索与抓取
-short_desc: 官方 Search / Fetch 接口直连，非钓鱼、可审计、内置依赖
+short_desc: 官方 Search / Fetch 接口直连，代码可审计、依赖内置
 desc: |
   接入 DeepSeek **官方**联网接口（https://api.deepseek.com/v1/tools/search 与 /fetch），
   给 AstrBot 的模型装上两项能力：
@@ -12,8 +12,9 @@ desc: |
 
   人工可用：/搜索、/抓取（可把正文渲染成长图发送）、/dsweb（状态自检）。
 
-  **为什么叫「真·」**：插件市场里存在同名概念的钓鱼插件，会骗走 API Key。
-  本插件：只访问 api.deepseek.com；密钥仅用于 Authorization 请求头；不写日志、不上报、无遥测；
+  **关于名字里的「真·」**：市场里已有同名的联网插件，我装过但没跑通，于是按官方文档自己写了一个；
+  「真·」只用于重名时区分，不针对任何具体项目。
+  本插件的做法：只访问 api.deepseek.com；密钥仅用于 Authorization 请求头；不写日志、不上报、无遥测；
   全部源码（约 800 行、中文注释）可逐行审计；依赖内置，不 pip 安装、不写宿主 site-packages。
 
   计费：Search 与 Fetch 各 5 元 / 1000 次成功请求（官方现行价格）。
