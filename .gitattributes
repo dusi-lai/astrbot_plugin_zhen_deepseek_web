@@ -2,3 +2,9 @@
 *.pem text eol=lf
 *.png binary
 *.zip binary
+
+# 发布 zip 时排除（git archive 读取）
+.github export-ignore
+dist export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore

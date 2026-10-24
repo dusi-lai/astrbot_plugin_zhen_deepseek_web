@@ -16,14 +16,11 @@ jobs:
       - name: Build plugin zip
         run: |
           NAME=$(basename "$GITHUB_REPOSITORY")
-          rm -rf build "$NAME"
-          mkdir -p build
-          cp -r . "build/$NAME"
-          cd build
-          rm -rf "$NAME/.git" "$NAME/.github" "$NAME/dist"
-          find "$NAME" -name '__pycache__' -type d -prune -exec rm -rf {} +
-          find "$NAME" -name '*.pyc' -delete
-          zip -r "../$NAME-${GITHUB_REF_NAME#v}.zip" "$NAME"
+          VERSION=${GITHUB_REF_NAME#v}
+          # git archive 只打包已提交内容，.gitattributes 里已把 .github/dist 排除
+          git archive --format=zip --prefix="$NAME/" --output="$NAME-$VERSION.zip" HEAD
+          echo "--- zip 内容（前 20 项）---"
+          unzip -l "$NAME-$VERSION.zip" | head -20
 
       - name: Publish release
         uses: softprops/action-gh-release@v2
