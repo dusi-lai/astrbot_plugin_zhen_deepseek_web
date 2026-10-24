@@ -1,0 +1,8 @@
+# 本插件不需要 pip 安装任何依赖。
+#
+# requests / urllib3 / certifi / idna 已直接内置在插件的 _vendor/ 目录里
+# （纯 Python，约 1.8 MB，含各包 LICENSE），插件复制到任何 AstrBot 实例都能直接用，
+# 不会 pip install、也不会往宿主的 site-packages 里写东西。
+#
+# 如果你想改用宿主环境自带的库，删掉 _vendor/ 也行：
+# 宿主有 requests 就用宿主的，没有则插件会提示「内置 requests 加载失败」。

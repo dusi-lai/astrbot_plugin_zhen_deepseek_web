@@ -1,0 +1,113 @@
+{
+  "api_key": {
+    "description": "DeepSeek API Key",
+    "type": "string",
+    "default": "",
+    "secret": true,
+    "obvious_hint": true,
+    "hint": "留空时依次尝试：环境变量 DEEPSEEK_API_KEY → AstrBot 里已配置的 DeepSeek 提供商密钥。本插件只把它放进 Authorization 头发给 api.deepseek.com，不会记录或外传。"
+  },
+  "base_url": {
+    "description": "接口地址",
+    "type": "string",
+    "default": "https://api.deepseek.com",
+    "hint": "官方地址是 https://api.deepseek.com，一般不用改。"
+  },
+  "timeout": {
+    "description": "请求超时（秒）",
+    "type": "int",
+    "default": 30,
+    "slider": { "min": 5, "max": 120, "step": 5 }
+  },
+  "search_count": {
+    "description": "默认返回条数",
+    "type": "int",
+    "default": 8,
+    "slider": { "min": 1, "max": 50, "step": 1 },
+    "hint": "官方范围 1~50。条数不影响计费（按请求次数计费）。"
+  },
+  "need_content": {
+    "description": "搜索时默认附带网页正文",
+    "type": "bool",
+    "default": false,
+    "hint": "开启后模型能直接读到正文，但返回内容更长、更耗上下文。"
+  },
+  "auto_fetch_top": {
+    "description": "二次抓取：自动抓前 N 条结果正文",
+    "type": "int",
+    "default": 0,
+    "slider": { "min": 0, "max": 3, "step": 1 },
+    "hint": "每次搜索后自动对前 N 条结果再调 Fetch 取正文，质量更好但每条多计费一次。0 = 关闭（模型可用工具参数 fetch_top 临时开启）。"
+  },
+  "auto_fetch_chars": {
+    "description": "二次抓取单篇正文截断长度",
+    "type": "int",
+    "default": 4000,
+    "slider": { "min": 500, "max": 12000, "step": 500 }
+  },
+  "max_summary_chars": {
+    "description": "每条结果摘要截断长度",
+    "type": "int",
+    "default": 800,
+    "slider": { "min": 100, "max": 3000, "step": 100 }
+  },
+  "max_content_chars": {
+    "description": "单篇正文截断长度（给模型）",
+    "type": "int",
+    "default": 8000,
+    "slider": { "min": 500, "max": 50000, "step": 500 }
+  },
+  "max_tool_output_chars": {
+    "description": "单次搜索结果总长度上限",
+    "type": "int",
+    "default": 12000,
+    "slider": { "min": 1000, "max": 50000, "step": 1000 },
+    "hint": "防止一次搜索把上下文塞爆，超出后多余结果会被省略。"
+  },
+  "fetch_output_mode": {
+    "description": "/抓取 指令的输出方式",
+    "type": "string",
+    "default": "image",
+    "options": ["text", "image", "both"],
+    "labels": ["文字预览", "正文转长图", "文字 + 长图"],
+    "subtitles": ["纯文本，最省事", "把 Markdown 正文渲染成长图发送", "先文字摘要再补一张长图"],
+    "hint": "转图使用 Pillow 在本地绘制，不需要安装 playwright / 浏览器。"
+  },
+  "image_width": {
+    "description": "长图宽度（像素）",
+    "type": "int",
+    "default": 1080,
+    "slider": { "min": 720, "max": 1600, "step": 20 }
+  },
+  "image_max_chars": {
+    "description": "长图最长容纳的正文字数",
+    "type": "int",
+    "default": 6000,
+    "slider": { "min": 500, "max": 20000, "step": 500 },
+    "hint": "超出的部分会截断并标注，避免生成几万像素高的图。"
+  },
+  "image_font": {
+    "description": "长图字体文件路径",
+    "type": "string",
+    "default": "",
+    "hint": "留空自动找系统中文字体（Windows 优先微软雅黑）。若长图出现方块乱码，填一个 .ttf/.ttc 的完整路径，例如 C:/Windows/Fonts/msyh.ttc"
+  },
+  "chat_preview_chars": {
+    "description": "文字预览长度",
+    "type": "int",
+    "default": 1200,
+    "slider": { "min": 200, "max": 5000, "step": 100 }
+  },
+  "enable_commands": {
+    "description": "启用 /搜索、/抓取 文本指令",
+    "type": "bool",
+    "default": true,
+    "hint": "关掉后只保留给模型调用的两个工具。"
+  },
+  "proxy": {
+    "description": "代理地址",
+    "type": "string",
+    "default": "",
+    "hint": "形如 http://127.0.0.1:7890。留空则复用 AstrBot 全局 http_proxy，再留空则跟随系统环境变量。"
+  }
+}
