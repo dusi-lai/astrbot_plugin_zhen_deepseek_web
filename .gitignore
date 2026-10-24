@@ -1,4 +1,6 @@
 __pycache__/
 *.py[cod]
-.venv/
 *.log
+.venv/
+.DS_Store
+dist/
