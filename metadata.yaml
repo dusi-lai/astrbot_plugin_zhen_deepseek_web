@@ -18,7 +18,7 @@ desc: |
   全部源码（约 800 行、中文注释）可逐行审计；依赖内置，不 pip 安装、不写宿主 site-packages。
 
   计费：Search 与 Fetch 各 5 元 / 1000 次成功请求（官方现行价格）。
-version: 1.2.1
+version: 1.2.2
 author: dusi-lai
 repo: https://github.com/dusi-lai/astrbot_plugin_zhen_deepseek_web
 astrbot_version: ">=4.16,<5"
