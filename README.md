@@ -52,11 +52,55 @@
 
 ## 安装
 
-```powershell
-Copy-Item -Recurse -Force ".\astrbot_plugin_zhen_deepseek_web" "$env:USERPROFILE\.astrbot\data\plugins\"
-```
+> **前提**：AstrBot **4.16 ~ 4.x**（`metadata.yaml` 里的 `astrbot_version: ">=4.16,<5"`）。
+> 本插件自带全部依赖，**不需要 `pip install` 任何东西**，也不要求宿主机装 Python 包。
+> 四种方式任选其一，装完都在「插件 → 插件 → 已安装」里确认插件已启用、不在「加载失败插件」列表里。
 
-然后在 AstrBot WebUI 的「插件」页点该插件卡片上的刷新图标（重载插件）。
+### 方式一：插件市场安装（推荐，最简单）
+
+1. 打开 AstrBot 管理面板 → 左侧 **插件** → 顶部 **插件** 标签 → 切到 **插件市场**；
+2. 在搜索框里搜「**真·DeepSeek**」或 `zhen_deepseek`；
+3. 点插件卡片的 **安装**，确认来源后等待完成；
+4. 回到 **已安装** 页面，确认插件已打开、无加载错误。
+
+> 搜不到多半是市场列表还没跟上（市场按版本收录），用方式二或方式三装最新版。
+
+### 方式二：从仓库链接安装
+
+想要最新代码、或市场里暂时搜不到时用：
+
+1. 「插件」页右下角 **安装插件（+）** → **从链接安装**；
+2. 粘贴仓库地址：`https://github.com/dusi-lai/astrbot_plugin_zhen_deepseek_web`；
+3. 确认来源并安装（这里要填**代码仓库地址**，不是插件介绍页/Cloud 页面地址）。
+
+### 方式三：从 zip 安装（离线 / 内网）
+
+1. 到 [Releases](https://github.com/dusi-lai/astrbot_plugin_zhen_deepseek_web/releases) 下载
+   `astrbot_plugin_zhen_deepseek_web-<版本>.zip`；
+2. 「插件」页 → **安装插件（+）** → **从文件安装** → 上传 zip；
+3. zip 根目录已经是 `astrbot_plugin_zhen_deepseek_web/`，**不要再套一层目录**。
+
+### 方式四：手动放进插件目录（进阶）
+
+适合自己部署 AstrBot、或想直接改代码调试：
+
+| 部署方式 | 插件目录 |
+| --- | --- |
+| 桌面版（Windows） | `%USERPROFILE%\.astrbot\data\plugins\` |
+| Docker / 服务器 | AstrBot 数据目录下的 `data/plugins/`（容器内通常 `/AstrBot/data/plugins`） |
+
+把整个文件夹放进去（目录名保持 `astrbot_plugin_zhen_deepseek_web`），
+然后在 WebUI「插件」页点该插件卡片的刷新图标（重载插件）即可。
+
+### 装完必做：填 API Key
+
+装完先看下面「配置」一节。不填 Key 插件也能加载，但调用时会返回 `401 API Key 无效` 的提示。
+
+### 更新 / 卸载
+
+- **更新**：在插件市场或「已安装」页面点插件卡片的 **更新**；配置不会丢（保存在 `data/config/astrbot_plugin_zhen_deepseek_web_config.json`）。
+- **卸载**：插件卡片菜单里选卸载；`data/plugin_data/astrbot_plugin_zhen_deepseek_web/` 下的历史长图可手动清理。
+- **注意**：本插件是「运行时注入」的，重载插件不需要重启 AstrBot。
 
 ## 配置
 
@@ -149,6 +193,17 @@ astrbot_plugin_zhen_deepseek_web/
 ├── LICENSE
 └── README.md
 ```
+
+## 从源码开发 / 本地调试（开发者）
+
+```powershell
+git clone https://github.com/dusi-lai/astrbot_plugin_zhen_deepseek_web
+# 把仓库目录放到 AstrBot 的 data/plugins/ 下，改完在 WebUI 点「重载插件」即可生效
+```
+
+- 单文件实现，全部逻辑在 `main.py`；改完 `python -m py_compile main.py` 检查语法。
+- 依赖在 `_vendor/`（requests 全家桶副本），**不要**把它删掉，也不要改成 `pip install`。
+- 发布前跑仓库根目录之外的 `发布前检查.py`（本地工具，不在插件包内）或至少确认三处版本号一致。
 
 ## 实测记录（AstrBot 4.28.1 / Python 3.12）
 
