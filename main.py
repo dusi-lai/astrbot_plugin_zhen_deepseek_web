@@ -59,7 +59,7 @@ from astrbot.api.event import AstrMessageEvent, filter  # noqa: E402
 from astrbot.api.star import Context, Star  # noqa: E402
 from astrbot.core.agent.tool import FunctionTool, ToolExecResult  # noqa: E402
 
-PLUGIN_VERSION = "1.2.3"
+PLUGIN_VERSION = "1.2.4"
 DEFAULT_BASE_URL = "https://api.deepseek.com"
 SEARCH_PATH = "/v1/tools/search"
 FETCH_PATH = "/v1/tools/fetch"
